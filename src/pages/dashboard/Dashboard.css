@@ -1,0 +1,21 @@
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .dashboard-body {
+    display: flex;
+    flex-grow: 1;
+    height: 100vh;
+  }
+
+  .right-sider{
+    width: 200px;
+    background-color: #001529;
+  }
+  
+ 
+  .ant-layout-sider-trigger {
+    position: absolute !important;
+  }
