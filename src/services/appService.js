@@ -21,6 +21,22 @@ const apiService = {
     }
   },
 
+  register: async (username, password) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/register`, {
+        username,
+        password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to login');
+    }
+  },
+
   fetchData: async (token) => {
     try {
       const response = await axios.get(`https://jsonplaceholder.typicode.com/users`);

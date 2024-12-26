@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,9 @@ import apiService from '../services/appService';
 
 const Login = ({ onLogin }) => {
   const [form] = Form.useForm();
+  const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
+
   const handleLogin  = async () => {
     try {
       let name = form.getFieldValue("username");
@@ -23,6 +25,20 @@ const Login = ({ onLogin }) => {
     }
   };
 
+  const handleRegister = async () => {
+    try {
+      let name = form.getFieldValue("username");
+      let password = form.getFieldValue("password");
+      if (name && password) {
+        await apiService.register(name, password);
+        setIsRegistering(false);
+        form.resetFields();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <Form
@@ -30,7 +46,7 @@ const Login = ({ onLogin }) => {
         name="normal_login"
         className="login-form"
         initialValues={{ remember: true }}
-        onFinish={handleLogin }
+        onFinish={isRegistering ? handleRegister : handleLogin}
       >
         <Form.Item
           name="username"
@@ -59,10 +75,12 @@ const Login = ({ onLogin }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-            Log in
+        <Button type="primary" htmlType="submit" className="login-form-button">
+            {isRegistering ? 'Register' : 'Log in'}
           </Button>
-          Or <a href="">register now!</a>
+          <Button type="link" onClick={() => setIsRegistering(!isRegistering)}>
+            {isRegistering ? 'Already have an account? Log in' : 'Don\'t have an account? Register'}
+          </Button>
         </Form.Item>
       </Form>
     </div>
