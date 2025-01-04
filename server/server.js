@@ -6,7 +6,10 @@ const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
 
-require('dotenv').config();
+require('dotenv').config({
+    path: process.env.NODE_ENV === 'production' ?
+        '.env.production' : '.env.development'
+});
 
 
 const app = express();
@@ -14,8 +17,20 @@ const port = process.env.PORT || 6100;
 
 //使用中间件
 app.use(bodyParser.json());
-app.use(cors());
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use(cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    credentials: true
+}));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 24小时
+    }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -50,5 +65,3 @@ process.on('SIGINT', () => {
         console.log('HTTP server closed');
     })
 })
-
-

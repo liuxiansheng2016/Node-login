@@ -1,13 +1,15 @@
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 启动项目
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# 开发环境
+npm start                  # 启动前端开发服务器
+npm run server:dev        # 启动后端开发服务器
 
-### `npm start`
+# 生产环境
+npm run build            # 构建前端应用
+npm run server:prod      # 启动生产环境服务器
+```
 
- to start the app

@@ -16,7 +16,7 @@ const Login = ({ onLogin }) => {
       let password = form.getFieldValue("password");
       if(name && password) {
         const response = await apiService.login(name, password);
-        localStorage.setItem('token', response.token);
+        sessionStorage.setItem('token', response.token);
         onLogin(); 
         navigate('/dashboard'); 
       }
