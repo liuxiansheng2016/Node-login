@@ -3,14 +3,16 @@ import MainContentComponent from './MainContent';
 import './Dashboard.css'; 
 import apiService from '../../services/appService';
 
-const DashboardComponent = ({ onLogout }) => {
+const DashboardComponent = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await apiService.fetchData();
-        setData(response);
+        if (response ) {
+          setData(response);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -19,10 +21,13 @@ const DashboardComponent = ({ onLogout }) => {
     fetchData();
   },[]);
 
-
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div className="dashboard-container">
-        <MainContentComponent data={data} />
+        <MainContentComponent data={data || {}} />
         <div className='right-sider'>
           RightSider
         </div>

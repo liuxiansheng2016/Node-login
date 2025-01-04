@@ -39,6 +39,7 @@ const Login = ({ onLogin }) => {
     }
   };
 
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <Form
@@ -81,6 +82,13 @@ const Login = ({ onLogin }) => {
           <Button type="link" onClick={() => setIsRegistering(!isRegistering)}>
             {isRegistering ? 'Already have an account? Log in' : 'Don\'t have an account? Register'}
           </Button>
+          {
+            !isRegistering && (
+              <Button type="link" href="api/auth/github">
+               {'Login with GitHub'}
+            </Button>
+            )
+          }
         </Form.Item>
       </Form>
     </div>

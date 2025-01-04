@@ -3,7 +3,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
+
 require('dotenv').config();
+
 
 const app = express();
 const port = process.env.PORT || 6100;
@@ -11,6 +15,9 @@ const port = process.env.PORT || 6100;
 //使用中间件
 app.use(bodyParser.json());
 app.use(cors());
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //连接DB
 require('./config/db');

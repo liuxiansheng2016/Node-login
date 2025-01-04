@@ -4,6 +4,7 @@ import LayoutComponent from './components/layout/LayoutComponent';
 import Login from './pages/Login';
 import DashboardComponent from './pages/dashboard/Dashboard';
 import Settings from './pages/Settings';
+import GitHubCallback from './pages/GitHubCallback'; // 新增导入
 import './App.css';
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/auth/github/callback" element={<GitHubCallback onLogin={handleLogin} />} />
         <Route
           path="/"
           element={
