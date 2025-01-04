@@ -1,13 +1,38 @@
-
-
 .login-form {
-  width: 300px;
-  padding: 24px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-form-button {
-  width: 100%;
+    width: 100%;
+}
+
+
+/* 浅色主题 */
+
+[data-theme='light'] {
+    --bg-color: #ffffff;
+    --text-color: rgba(0, 0, 0, 0.85);
+    --card-bg: #ffffff;
+}
+
+
+/* 深色主题 */
+
+[data-theme='dark'] {
+    --bg-color: #141414;
+    --text-color: rgba(255, 255, 255, 0.85);
+    --card-bg: #1f1f1f;
+}
+
+
+/* 应用主题变量 */
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s;
 }
