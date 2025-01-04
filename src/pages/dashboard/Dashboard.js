@@ -13,12 +13,15 @@ const DashboardComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const response = await apiService.fetchData();
         if (response) {
           setData(response);
+          setLoading(false);
         }
       } catch (error) {
-        console.error(error);
+        setLoading(false);
+        setError(error);
       }
     };
 
@@ -33,7 +36,7 @@ const DashboardComponent = () => {
   return (
     <div className="dashboard-container">
       <MainContentComponent data={data} />{" "}
-      <div className="right-sider">RightSider </div>{" "}
+      <div className="right-sider"> RightSider </div>{" "}
     </div>
   );
 };
